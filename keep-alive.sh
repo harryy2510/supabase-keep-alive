@@ -168,7 +168,7 @@ sed -i.bak "s/DOWN/$down_count/" "$STATUS_FILE"
 rm -f "$STATUS_FILE.bak"
 
 # Add each project row
-echo "$results" | jq -r '.[] | "| \(if .status == "up" then "✅" elif .status == "error" then "⚠️" else "❌" end) | \(.name) | @\(.owner) | \(.response_time) | \(.last_ping) |"' >> "$STATUS_FILE"
+echo "$results" | jq -r '.[] | "| \(if .status == "up" then "✅" elif .status == "error" then "⚠️" else "❌" end) | \(.name) | [@\(.owner)](https://github.com/\(.owner)) | \(.response_time) | \(.last_ping) |"' >> "$STATUS_FILE"
 
 # Add footer
 cat >> "$STATUS_FILE" << 'FOOTER'
