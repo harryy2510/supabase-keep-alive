@@ -40,5 +40,17 @@
     "owner": "harryy2510",
     "url": "https://jdgcsdazjypgabvkiwky.supabase.co",
     "anon_key": "sb_publishable_9ZwcuddeDHZ4sIt4lv14yg_I-UIr7yG"
+  },
+  {
+    "name": "MKT Prod",
+    "owner": "harryy2510",
+    "url": "https://otoeadsdiuyrokjmvfwy.supabase.co",
+    "anon_key": "sb_publishable_aNDEvoABWyAdIq_GQ9bGdw_niC1QOGK"
+  },
+  {
+    "name": "MKT Dev",
+    "owner": "harryy2510",
+    "url": "https://lflukvlonkftzdmibcce.supabase.co",
+    "anon_key": "sb_publishable_3pbSavcgWJOCcEUNadkPIg_geaalosQ"
   }
 ]
