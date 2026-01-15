@@ -6,13 +6,14 @@ CREATE OR REPLACE FUNCTION public.keep_alive()
 RETURNS jsonb
 LANGUAGE plpgsql
 SECURITY DEFINER
+SET search_path = ''
 AS $$
 BEGIN
-  RETURN jsonb_build_object(
-    'status', 'alive',
-    'timestamp', now(),
-    'message', 'Database is active'
-  );
+RETURN jsonb_build_object(
+        'status', 'alive',
+        'timestamp', now(),
+        'message', 'Database is active'
+       );
 END;
 $$;
 
