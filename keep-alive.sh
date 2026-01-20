@@ -175,7 +175,7 @@ cat >> "$STATUS_FILE" << 'FOOTER'
 
 ---
 
-*Status is updated automatically every 2 days via GitHub Actions*
+*Status is updated automatically every 5 minutes via Cloudflare Workers*
 FOOTER
 
 echo "Status report generated: STATUS.md"

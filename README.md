@@ -2,7 +2,7 @@
 
 A community-driven service to keep free Supabase instances active.
 
-Supabase pauses free-tier projects after 7 days of inactivity. This repo automatically pings all registered projects every 2 days to prevent that.
+Supabase pauses free-tier projects after 7 days of inactivity. This repo pings all registered projects every 5 minutes via Cloudflare Workers to prevent that.
 
 ## Live Status
 
@@ -19,23 +19,16 @@ See [STATUS.md](STATUS.md) for current status of all projects.
 ## How It Works
 
 ```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│  GitHub Actions │────▶│  keep-alive.sh   │────▶│  Your Supabase  │
-│  (every 2 days) │     │ (100 concurrent) │     │    Projects     │
-└─────────────────┘     └──────────────────┘     └─────────────────┘
-                                │
-                                ▼
-                        ┌──────────────────┐
-                        │   STATUS.md      │
-                        │ (auto-updated)   │
-                        └──────────────────┘
+┌──────────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  Cloudflare Worker   │────▶│  Parallel pings  │────▶│  Your Supabase  │
+│  (every 5 minutes)   │     │  (all at once)   │     │    Projects     │
+└──────────────────────┘     └──────────────────┘     └─────────────────┘
 ```
 
 1. You create a `keep_alive()` function via simple SQL migration
 2. You add your project to `projects.json` via PR
-3. GitHub Actions pings all projects **in parallel** (100 concurrent) every 2 days
+3. Cloudflare Worker pings all projects in parallel every 5 minutes
 4. Each ping calls your `keep_alive()` function, exercising the database
-5. Status is automatically updated in `STATUS.md`
 
 ## Is the anon key safe?
 
@@ -43,10 +36,11 @@ See [STATUS.md](STATUS.md) for current status of all projects.
 
 ## Self-Hosting
 
-Fork the repo - GitHub Actions runs automatically. Or run locally:
-
 ```bash
-./keep-alive.sh  # requires: jq, curl
+cd cloudflare-worker
+npm install
+npx wrangler login
+npm run deploy
 ```
 
 ## License

@@ -55,7 +55,7 @@ From Supabase Dashboard → Settings → API, copy:
 ## Step 4: Done!
 
 Once merged:
-- Your project gets pinged every 2 days
+- Your project gets pinged every 5 minutes
 - Status appears in [STATUS.md](STATUS.md)
 - Your free tier stays active!
 

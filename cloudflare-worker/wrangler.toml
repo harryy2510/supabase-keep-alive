@@ -1,0 +1,7 @@
+name = "supabase-keep-alive"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Cron triggers - runs every 5 minutes
+[triggers]
+crons = ["*/5 * * * *"]
