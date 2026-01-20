@@ -47,6 +47,9 @@ async function pingProject(project: Project): Promise<PingResult> {
       },
     });
 
+    // Must consume response body to prevent deadlock
+    await response.text();
+
     const duration = Date.now() - start;
     const status = response.ok ? 'up' : 'down';
 
@@ -111,11 +114,12 @@ async function sendWebhook(env: Env, summary: Summary): Promise<void> {
   }
 
   try {
-    await fetch(env.WEBHOOK_URL, {
+    const res = await fetch(env.WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
+    await res.text(); // Consume response body
     console.log(JSON.stringify({ level: 'info', event: 'webhook_sent' }));
   } catch (error) {
     console.log(JSON.stringify({ level: 'error', event: 'webhook_failed', error: String(error) }));
@@ -167,7 +171,7 @@ async function pingAllProjects(env: Env): Promise<Summary> {
 }
 
 export default {
-  async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
+  async scheduled(event: ScheduledEvent, env: Env, _ctx: ExecutionContext): Promise<void> {
     console.log(JSON.stringify({
       level: 'info',
       event: 'cron_start',
@@ -186,7 +190,7 @@ export default {
     }
   },
 
-  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
     console.log(JSON.stringify({
       level: 'info',
       event: 'http_request',
