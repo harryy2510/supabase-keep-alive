@@ -37,7 +37,6 @@ See [STATUS.md](STATUS.md) for current status of all projects.
 ## Self-Hosting
 
 ```bash
-cd cloudflare-worker
 npm install
 npx wrangler login
 npm run deploy
