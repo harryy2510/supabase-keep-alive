@@ -5,3 +5,14 @@ compatibility_date = "2024-01-01"
 # Cron triggers - runs every 5 minutes
 [triggers]
 crons = ["*/5 * * * *"]
+
+# Enable observability (logs, metrics)
+[observability]
+enabled = true
+
+# Environment variables (optional)
+# Set these via: npx wrangler secret put WEBHOOK_URL
+#
+# [vars]
+# NOTIFY_ON = "failures"  # "all" | "failures" (default: failures)
+# PROJECTS_URL = "https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/projects.json"
